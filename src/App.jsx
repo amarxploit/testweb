@@ -51,6 +51,7 @@ function App() {
      </div><div className="hinge"/><div className="laptop-base"><div className="base-shine"/><div className="trackpad"/></div>
     </div>
    </div><div className="journey-caption"><span>SCROLL-DRIVEN PRESENTATION</span><span>THE WORK SPEAKS / 01—04</span></div></div>
+   </div>
   </section>
   <footer className="outro" id="contact"><span>AMARXPLOIT / PERSONAL PORTFOLIO</span><a href="https://github.com/amarxploit" target="_blank" rel="noreferrer">VIEW SOURCE ON GITHUB <ArrowUpRight size={15}/></a><span>© 2026</span></footer>
  </main>;
