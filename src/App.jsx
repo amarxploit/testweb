@@ -2,50 +2,58 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
-import { ArrowUpRight, Github, Instagram, Activity, LockKeyhole, Cpu, Radio, Fingerprint, MoveUpRight } from 'lucide-react';
+import { ArrowUpRight, Github, Instagram, LockKeyhole, Fingerprint, Radio, Cpu, Activity } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  { tag:'SECURE_COMMS', name:'VamoraChat', desc:'A private room-based communication platform designed for temporary and controlled conversations. Features room identifiers and passphrases with auto-deletion for maximum privacy.', icon:LockKeyhole, state:'ENCRYPTED' },
-  { tag:'AI_SECURITY / BETA', name:'Deepfake Detection', desc:'A web-based AI system designed to detect deepfake images and videos. Uses ML models to analyze facial inconsistencies and manipulation artifacts.', icon:Fingerprint, state:'BETA PHASE' },
-  { tag:'IOT_HARDWARE', name:'Women-Safety Node', desc:'ESP8266 + N8N + Telegram integration. IoT device that sends emergency alerts to designated contacts when triggered via hardware.', icon:Radio, state:'ACTIVE' },
-  { tag:'PENTESTING', name:'Python Keylogger', desc:'Ethical keylogger research for authorized security testing in controlled lab environments.', icon:Activity, state:'RESEARCH' },
-  { tag:'RESEARCH', name:'IoT Hacking Lab', desc:'Controlled environment for analyzing IoT firmware vulnerabilities and developing secure firmware analysis fixes.', icon:Cpu, state:'ONGOING' }
+  { tag:'SECURE COMMS', name:'VamoraChat', desc:'A private room-based communication platform for controlled conversations, with room identifiers, passphrases and auto-deletion.', icon:LockKeyhole, state:'ENCRYPTED' },
+  { tag:'AI SECURITY / BETA', name:'Deepfake Detection', desc:'An AI system designed to analyse images and videos for signs of synthetic manipulation.', icon:Fingerprint, state:'BETA PHASE' },
+  { tag:'IOT HARDWARE', name:'Women-Safety Node', desc:'ESP8266, N8N and Telegram integration. A connected device that sends emergency alerts to designated contacts.', icon:Radio, state:'ACTIVE' },
+  { tag:'SECURITY RESEARCH', name:'Python Keylogger', desc:'Ethical input-monitoring research for authorised security testing in controlled lab environments.', icon:Activity, state:'LAB RESEARCH' },
+  { tag:'RESEARCH', name:'IoT Hacking Lab', desc:'A controlled environment for studying IoT firmware security and defensive analysis.', icon:Cpu, state:'ONGOING' }
 ];
 
 function App() {
-  const root = useRef(null);
-  useEffect(() => {
-    const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
-    let frame;
-    const raf = (time) => { lenis.raf(time); frame = requestAnimationFrame(raf); };
-    frame = requestAnimationFrame(raf);
-    lenis.on('scroll', ScrollTrigger.update);
-    const ctx = gsap.context(() => {
-      gsap.from('.hero-kicker, .hero-title, .hero-copy, .hero-actions', { y: 34, opacity: 0, duration: 1, stagger: .13, ease: 'power3.out', delay: .2 });
-      gsap.utils.toArray('.reveal').forEach((el) => gsap.from(el, { y: 44, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
-      gsap.utils.toArray('.project-card').forEach((el, i) => gsap.from(el, { y: 55, opacity: 0, duration: .8, delay: (i % 2) * .08, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } }));
-      gsap.to('.orb-one', { y: -65, x: 30, duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-      gsap.to('.orb-two', { y: 55, x: -25, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-    }, root);
-    return () => { ctx.revert(); cancelAnimationFrame(frame); lenis.destroy(); };
-  }, []);
-  return <main ref={root}>
-    <div className="noise" /><div className="grid-bg" /><div className="orb orb-one" /><div className="orb orb-two" />
-    <header className="topbar"><a className="brand" href="#home"><span className="brand-mark">A<span>.</span></span><span>AMAR<span className="muted">XPLOIT</span></span></a><div className="session"><i /> SECURE_SESSION // ACTIVE</div><a className="menu-link" href="#contact">CONNECT <MoveUpRight size={14}/></a></header>
-    <section className="hero" id="home">
-      <div className="hero-left"><div className="hero-kicker mono"><span className="pulse" /> INDEPENDENT RESEARCHER / DEVELOPER</div>
-        <h1 className="hero-title">Amarnath<br/><span>Nayak<span className="accent">.</span></span></h1>
-        <p className="hero-copy">Cybersecurity researcher exploring the edges of <b>WiFi security</b>, <b>IoT systems</b> and <b>AI development</b>. Building practical tools, experiments and safety-focused technology.</p>
-        <div className="hero-actions"><a className="primary-btn" href="#work">EXPLORE WORK <ArrowUpRight size={16}/></a><a className="text-btn" href="#about">ABOUT ME <span>↓</span></a></div>
-      </div>
-      <div className="hero-visual"><div className="radar"><div className="radar-ring r1"/><div className="radar-ring r2"/><div className="radar-ring r3"/><div className="radar-cross h"/><div className="radar-cross v"/><div className="radar-sweep"/><div className="radar-core"><span>AX</span></div><i className="dot d1"/><i className="dot d2"/><i className="dot d3"/></div><div className="visual-label mono"><span>NODE_01</span><span>ONLINE <i/></span></div></div>
-      <div className="hero-bottom mono"><span>SCROLL TO EXPLORE</span><span>01 / 03</span><span>BUILD V3.0.0_AGENTIC</span></div>
-    </section>
-    <section className="about section" id="about"><div className="section-head reveal"><span className="number mono">01 / PROFILE</span><span className="section-line"/><span className="mono small">IDENTITY_LAYER</span></div><div className="about-grid"><h2 className="reveal">Curiosity<br/>into <em>capability.</em></h2><div className="about-content reveal"><p>I'm <b>@amarxploit</b>. Started ICT in class 5; 1.5 years hands-on in cybersecurity. I build IoT safety devices, automate flows with N8N, and use AI to speed product development.</p><div className="status-grid"><div><span className="mono">CEH STATUS</span><b>IN PROGRESS</b></div><div><span className="mono">IOT RESEARCH</span><b className="green">ACTIVE</b></div><div><span className="mono">AI MODELING</span><b>BETA PHASE</b></div></div></div></div></section>
-    <section className="work section" id="work"><div className="section-head reveal"><span className="number mono">02 / SELECTED WORK</span><span className="section-line"/><span className="mono small">INTELLIGENCE_ASSETS</span></div><div className="work-intro reveal"><h2>Built to<br/><em>explore.</em></h2><p>A selection of experiments, tools and systems across secure communication, AI and connected devices.</p></div><div className="project-grid">{projects.map((p,i)=><article className="project-card" key={p.name}><div className="card-top mono"><span>{p.tag}</span><span>0{i+1}</span></div><div className="project-icon"><p.icon size={22}/></div><h3>{p.name}</h3><p className="project-desc">{p.desc}</p><div className="card-bottom mono"><span>{p.state}</span><ArrowUpRight size={16}/></div></article>)}</div></section>
-    <section className="certs section"><div className="section-head reveal"><span className="number mono">03 / CREDENTIALS</span><span className="section-line"/><span className="mono small">VERIFIED_LEARNING</span></div><div className="cert-list"><article className="cert-row reveal"><span className="cert-index mono">01</span><div><span className="mono cert-tag">PENETEST_CREDENTIAL</span><h3>Wifi Hacking &amp; Penetration Testing</h3><p>Completed professional certification at M Cyber Academy. Covers penetration testing methodologies on wireless networks, packet analysis and countermeasure deployment.</p></div><span className="cert-date mono">25 APR 2026</span></article><article className="cert-row reveal"><span className="cert-index mono">02</span><div><span className="mono cert-tag">AUTOMATION_SCRIPTING</span><h3>Python For Hackers: Mastering Python For Ethical Hacking</h3><p>Certified automation and security script developer from M Cyber Academy. Focuses on security auditing tools, network programming and threat mitigation automation.</p></div><span className="cert-date mono">25 APR 2026</span></article></div></section>
-    <footer className="footer section" id="contact"><div className="section-head reveal"><span className="number mono">04 / ESTABLISH LINK</span><span className="section-line"/><span className="mono small">NEURAL_LINK</span></div><div className="footer-main reveal"><div><span className="mono footer-kicker">DIRECT COMMUNICATION SUBSYSTEM</span><h2>Let's build<br/><em>what's next.</em></h2><p>Ready for collaboration and research.</p></div><div className="socials"><a href="https://www.instagram.com/amarxploit" target="_blank" rel="noreferrer"><Instagram/> INSTAGRAM <ArrowUpRight/></a><a href="https://github.com/amarxploit" target="_blank" rel="noreferrer"><Github/> GITHUB <ArrowUpRight/></a></div></div><div className="footer-bottom mono"><span>© 2026 AMARNATH NAYAK</span><span>SECURE_LAYER: TLS_1.3</span><span>BUILT WITH INTENT <b>✳</b></span></div></footer>
-  </main>;
+ const root = useRef(null);
+ useEffect(() => {
+  const lenis = new Lenis({ duration:1.15, smoothWheel:true });
+  let raf;
+  const tick = t => { lenis.raf(t); raf=requestAnimationFrame(tick); };
+  raf=requestAnimationFrame(tick);
+  lenis.on('scroll', ScrollTrigger.update);
+  const ctx = gsap.context(() => {
+   const screen = gsap.to('.screen-page', { yPercent:-76, ease:'none', scrollTrigger:{ trigger:'.journey', start:'top top', end:'bottom bottom', scrub:1.15 } });
+   gsap.from('.laptop-scene',{ opacity:0, y:55, rotateX:12, duration:1.35, ease:'power3.out', delay:.2 });
+   gsap.to('.laptop-shell',{ rotateY:-7, rotateX:2, ease:'none', scrollTrigger:{trigger:'.journey',start:'top top',end:'bottom bottom',scrub:1.3}});
+   gsap.utils.toArray('.screen-section').forEach(el=>gsap.from(el,{opacity:.4,scrollTrigger:{trigger:el,containerAnimation:screen,start:'top 85%',end:'top 40%',scrub:true}}));
+   gsap.from('.intro-copy > *',{y:25,opacity:0,stagger:.12,duration:.9,ease:'power3.out',delay:.3});
+  },root);
+  return()=>{ctx.revert();cancelAnimationFrame(raf);lenis.destroy();};
+ },[]);
+ return <main ref={root}>
+  <div className="ambient-grid"/><div className="glow glow-a"/><div className="glow glow-b"/>
+  <header className="nav"><a className="wordmark" href="#top">AMAR<span>XPLOIT</span><i>®</i></a><span className="nav-status"><b/> DIGITAL PORTFOLIO / 2026</span><a className="nav-contact" href="#contact">LET'S CONNECT <ArrowUpRight size={14}/></a></header>
+  <section className="intro" id="top">
+   <div className="intro-copy"><div className="eyebrow"><span/> INDEPENDENT RESEARCHER & DEVELOPER</div><h1>Ideas built<br/>to <em>exist.</em></h1><p>A closer look at the work, experiments and systems of <strong>Amarnath Nayak</strong>.</p><div className="scroll-hint"><span className="mouse"><i/></span> SCROLL TO EXPLORE THE PORTFOLIO</div></div>
+   <div className="intro-side"><span>INTERACTIVE EXPERIENCE</span><strong>01 — 04</strong><small>CYBERSECURITY<br/>IOT SYSTEMS<br/>AI DEVELOPMENT</small></div>
+  </section>
+  <section className="journey" aria-label="3D portfolio presentation">
+   <div className="laptop-sticky"><div className="laptop-scene">
+    <div className="laptop-shell">
+     <div className="screen-frame"><div className="camera-dot"/><div className="screen">
+      <div className="browser-bar"><div className="browser-dots"><i/><i/><i/></div><div className="address">amarxploit.netlify.app</div><span>•••</span></div>
+      <div className="screen-window"><div className="screen-page">
+       <section className="screen-section screen-hero"><div className="screen-nav"><b>AX<span>.</span></b><span>PORTFOLIO&nbsp;&nbsp; / &nbsp;&nbsp;2026</span><span>AVAILABLE FOR PROJECTS</span></div><div className="screen-hero-copy"><small>CYBERSECURITY RESEARCHER / DEVELOPER</small><h2>AMARNATH<br/><em>NAYAK.</em></h2><p>Exploring WiFi security, IoT systems<br/>and intelligent software.</p><a href="#screen-about">EXPLORE PROFILE ↗</a></div><div className="hero-index">01 <i/> 04</div><div className="screen-crosshair">AX / 001</div></section>
+       <section className="screen-section screen-about" id="screen-about"><div className="screen-label">01 / BACKGROUND & PHILOSOPHY</div><div className="about-screen-grid"><h2>Curiosity<br/>into <em>capability.</em></h2><div><p>I'm @amarxploit. I started exploring technology through ICT and developed a hands-on interest in cybersecurity, connected devices and AI.</p><p>I build practical tools, IoT safety systems and automation workflows, always learning through experiments and research.</p><div className="mini-stats"><span>CEH <b>IN PROGRESS</b></span><span>IOT <b>ACTIVE</b></span><span>AI <b>BETA</b></span></div></div></div><div className="section-watermark">PROFILE</div></section>
+       <section className="screen-section screen-work"><div className="screen-label">02 / SELECTED WORK</div><div className="work-screen-head"><h2>Selected <em>projects.</em></h2><p>Experiments and systems<br/>across different domains.</p></div><div className="screen-projects">{projects.map((p,i)=><article className="screen-project" key={p.name}><div className="project-meta"><span>{p.tag}</span><span>0{i+1}</span></div><p.icon size={19}/><h3>{p.name}</h3><p>{p.desc}</p><b>{p.state} ↗</b></article>)}</div></section>
+       <section className="screen-section screen-certs"><div className="screen-label">03 / CREDENTIALS</div><h2>Learning in<br/><em>progress.</em></h2><div className="credential"><span>01 / APR 2026</span><div><h3>WiFi Hacking & Penetration Testing</h3><p>M Cyber Academy · Certification</p></div><b>COMPLETED ↗</b></div><div className="credential"><span>02 / APR 2026</span><div><h3>Python For Hackers</h3><p>M Cyber Academy · Ethical Hacking</p></div><b>COMPLETED ↗</b></div><div className="cert-foot">CONTINUOUS LEARNING / PRACTICAL RESEARCH</div></section>
+       <section className="screen-section screen-contact"><div className="screen-label">04 / ESTABLISH CONNECTION</div><small>HAVE A PROJECT IN MIND?</small><h2>Let's build<br/><em>what's next.</em></h2><p>Open to collaboration, ideas and meaningful projects.</p><div className="screen-socials"><a href="https://github.com/amarxploit" target="_blank" rel="noreferrer"><Github size={16}/> GITHUB ↗</a><a href="https://instagram.com/amarxploit" target="_blank" rel="noreferrer"><Instagram size={16}/> INSTAGRAM ↗</a></div><div className="screen-footer">© 2026 AMARNATH NAYAK <span>BUILT WITH INTENT ✳</span></div></section>
+      </div></div>
+     </div><div className="hinge"/><div className="laptop-base"><div className="base-shine"/><div className="trackpad"/></div>
+    </div>
+   </div><div className="journey-caption"><span>SCROLL-DRIVEN PRESENTATION</span><span>THE WORK SPEAKS / 01—04</span></div></div>
+  </section>
+  <footer className="outro" id="contact"><span>AMARXPLOIT / PERSONAL PORTFOLIO</span><a href="https://github.com/amarxploit" target="_blank" rel="noreferrer">VIEW SOURCE ON GITHUB <ArrowUpRight size={15}/></a><span>© 2026</span></footer>
+ </main>;
 }
 export default App;
