@@ -22,10 +22,9 @@ function App() {
   raf=requestAnimationFrame(tick);
   lenis.on('scroll', ScrollTrigger.update);
   const ctx = gsap.context(() => {
-   const screen = gsap.to('.screen-page', { yPercent:-76, ease:'none', scrollTrigger:{ trigger:'.journey', start:'top top', end:'bottom bottom', scrub:1.15 } });
+   const screen = gsap.to('.screen-page', { yPercent:-80, ease:'none', scrollTrigger:{ trigger:'.journey', start:'top top', end:'bottom bottom', scrub:1.15 } });
    gsap.from('.laptop-scene',{ opacity:0, y:55, rotateX:12, duration:1.35, ease:'power3.out', delay:.2 });
    gsap.to('.laptop-shell',{ rotateY:-7, rotateX:2, ease:'none', scrollTrigger:{trigger:'.journey',start:'top top',end:'bottom bottom',scrub:1.3}});
-   gsap.utils.toArray('.screen-section').forEach(el=>gsap.from(el,{opacity:.4,scrollTrigger:{trigger:el,containerAnimation:screen,start:'top 85%',end:'top 40%',scrub:true}}));
    gsap.from('.intro-copy > *',{y:25,opacity:0,stagger:.12,duration:.9,ease:'power3.out',delay:.3});
   },root);
   return()=>{ctx.revert();cancelAnimationFrame(raf);lenis.destroy();};
